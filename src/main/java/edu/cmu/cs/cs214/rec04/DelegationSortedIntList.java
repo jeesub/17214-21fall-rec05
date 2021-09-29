@@ -13,8 +13,32 @@ package edu.cmu.cs.cs214.rec04;
 // HINT: Take a look at the UML diagram to see what DelegationSortedIntList
 //       should implement.
 public class DelegationSortedIntList {
+    private SortedIntList sortedIntList;
     // the number of attempted element insertions
     private int totalAdded;
+
+    public DelegationSortedIntList() {
+        sortedIntList = new SortedIntList();
+    }
+
+    public boolean add(int num) {
+        if (sortedIntList.add(num)) {
+            totalAdded++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addAll(DelegationSortedIntList list) {
+        boolean success = false;
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            success |= this.add(list.get(i));
+        }
+
+        return success;
+    }
 
     /**
      * Gets the total number of attempted int insertions to the list since it.
@@ -27,4 +51,11 @@ public class DelegationSortedIntList {
         return totalAdded;
     }
 
+    public int size() {
+        return sortedIntList.size();
+    }
+
+    public int get(int index) {
+        return sortedIntList.get(index);
+    }
 }
