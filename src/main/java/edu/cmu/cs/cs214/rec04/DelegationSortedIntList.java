@@ -19,25 +19,17 @@ public class DelegationSortedIntList {
 
     public DelegationSortedIntList() {
         sortedIntList = new SortedIntList();
+        totalAdded = 0;
     }
 
     public boolean add(int num) {
-        if (sortedIntList.add(num)) {
-            totalAdded++;
-            return true;
-        }
-        return false;
+        totalAdded++;
+        return sortedIntList.add(num);
     }
 
     public boolean addAll(DelegationSortedIntList list) {
-        boolean success = false;
-
-        for (int i = 0; i < list.size(); i++)
-        {
-            success |= this.add(list.get(i));
-        }
-
-        return success;
+        totalAdded += list.size();
+        return sortedIntList.addAll(list.sortedIntList);
     }
 
     /**
